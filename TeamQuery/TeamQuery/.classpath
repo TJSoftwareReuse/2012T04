@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jar to import/CM.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jar to import/FM.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jar to import/license.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jar to import/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jar to import/PM.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="D:/TeamQuery(1)/TeamQuery/jar/CM.jar"/>
+	<classpathentry kind="lib" path="D:/TeamQuery(1)/TeamQuery/jar/FM.jar"/>
+	<classpathentry kind="lib" path="D:/TeamQuery(1)/TeamQuery/jar/license.jar"/>
+	<classpathentry kind="lib" path="D:/TeamQuery(1)/TeamQuery/jar/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/TeamQuery(1)/TeamQuery/jar/PM.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

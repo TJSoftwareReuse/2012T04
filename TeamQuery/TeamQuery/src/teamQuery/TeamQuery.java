@@ -1,13 +1,5 @@
 package teamQuery;
-import java.awt.HeadlessException;
 import java.io.IOException;
-
-
-
-
-
-
-
 
 import javax.swing.JOptionPane;
 
@@ -137,6 +129,11 @@ public class TeamQuery implements EventInterface {
 			}
 			//返回消息
 			pm.addIndex("GetMsg", 1);
+			int remainder = li.getRemainedNum();
+			if(remainder <= 3)
+			{
+				JOptionPane.showMessageDialog(dlg, "剩余查询次数为"+remainder+"次");
+			}
 			return true;
 		} else {
 			//拒绝服务
