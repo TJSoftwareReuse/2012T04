@@ -129,19 +129,11 @@ public class TeamQuery implements EventInterface {
 			}
 			//返回消息
 			pm.addIndex("GetMsg", 1);
-<<<<<<< HEAD
 			int remainder = li.getRemainedNum();
 			if(remainder <= 3)
 			{
 				JOptionPane.showMessageDialog(dlg, "剩余查询次数为"+remainder+"次");
 			}
-=======
-            int remainder = li.getRemainedNum();
-            if(remainder <= 3)
-            {
-                JOptionPane.showMessageDialog(dlg, "剩余查询次数为"+remainder+"次");
-            }
->>>>>>> origin/master
 			return true;
 		} else {
 			//拒绝服务
