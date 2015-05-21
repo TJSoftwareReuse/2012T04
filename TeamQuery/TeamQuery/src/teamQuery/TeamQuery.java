@@ -23,17 +23,17 @@ import com.eva.me.cm.ConfigUtil;
 
 
 public class TeamQuery implements EventInterface {
-	
+
 	static ConfigUtil  cm;
     static FM          fm;
 	static license     li;
 	static PMPerMinute pm;
 	static QueryDialog dlg;
 	static Students	   stus;
-	
-	
+
+
 	private static boolean init() {
-		
+
 
 		cm = new ConfigUtil();
 		cm.loadConfigFile();
@@ -43,18 +43,18 @@ public class TeamQuery implements EventInterface {
 		int    nLicense = Integer.parseInt(cm.getProperty("license"));
 		String strFmPath = cm.getProperty("FMFilePath");
 		String strPmDir = cm.getProperty("PMDirPath");
-		
-		
+
+
 		if(strFmPath.equals("default")) {
 			strFmPath = "fm.log";
 		}
 		if(strPmDir.equals("default")) {
 			strPmDir = "pm";
 		}
-		
-		
+
+
 		if(strUser.equals("abc") && strPass.equals("123456")) {
-		
+
 			//fm设置文件
 			try {
 			fm = new FM();
@@ -69,37 +69,37 @@ public class TeamQuery implements EventInterface {
 			}catch (Exception e) {
 				logError("pm Init Error");
 			}
-			
+
 			li = new license();
 			//license设置容量
 			li.ChangeInitialNum(nLicense);
-			
+
 			//初始化完毕
 			return true;
-		
+
 		} else {
 			logError("User no Access");
 		}
 
 		return false;
 	}
-	
-	@Override  
+
+	@Override
  	public boolean queryByName(String strStudentName) {
 		pm.addIndex("GetInfo", 1);
-		
+
 		//判断并加1
 		if(li.JudgeServiceRequest()) {
 			//提供服务
 			fm.warn(123, "InService");
-			pm.addIndex("InService", 1);	
+			pm.addIndex("InService", 1);
 			if(!strStudentName.equals(null)) {
 				Student stu = stus.getStudentByName(strStudentName);
 				if (stu != null) {
 					dlg.setUI(stu.getStudentName(), stu.getStudentId(), stu.getTeamId(), stu.getSex(),stu.getGithubAccount());
 				} else {
 					dlg.setUI("not found", 0, 0, "not found","not found");
-				
+
 				}
 				pm.addIndex("GetMsg", 1);
 				int remainder = li.getRemainedNum();
@@ -107,20 +107,20 @@ public class TeamQuery implements EventInterface {
 				{
 					JOptionPane.showMessageDialog(dlg, "剩余查询次数为"+remainder+"次");
 				}
-				
+
 			}
 			return true;
 		} else {
 			//拒绝服务
-			dlg.setUI("out service", 0, 0, "out service","out service");			
+			dlg.setUI("out service", 0, 0, "out service","out service");
 			pm.addIndex("OutService", 1);
 			fm.warn(124, "OutService");
 			pm.addIndex("GetMsg", 1);
 			return false;
 		}
 	}
- 	
-	@Override  
+
+	@Override
 	public boolean queryById(int nStudentId) {
 		pm.addIndex("GetInfo", 1);
 		//判断并加1
@@ -133,10 +133,15 @@ public class TeamQuery implements EventInterface {
 				dlg.setUI(stu.getStudentName(), stu.getStudentId(), stu.getTeamId(), stu.getSex(),stu.getGithubAccount());
 			} else {
 				dlg.setUI("not found", 0, 0, "not found","not found");
-			
+
 			}
 			//返回消息
 			pm.addIndex("GetMsg", 1);
+            int remainder = li.getRemainedNum();
+            if(remainder <= 3)
+            {
+                JOptionPane.showMessageDialog(dlg, "剩余查询次数为"+remainder+"次");
+            }
 			return true;
 		} else {
 			//拒绝服务
@@ -147,29 +152,29 @@ public class TeamQuery implements EventInterface {
 			pm.addIndex("GetMsg", 1);
 			return false;
 		}
-		
-		
+
+
 	}
-	
+
 	public static void logError(String strMessage) {
-		Logger log = null;		
+		Logger log = null;
 		log = Logger.getLogger("TeamQuery");
 		PropertyConfigurator.configure("log4j.properties");
-		log.error(strMessage);	
+		log.error(strMessage);
 	}
 	public static void logWarn(String strMessage) {
-		Logger log = null;		
+		Logger log = null;
 		log = Logger.getLogger("TeamQuery");
 		PropertyConfigurator.configure("log4j.properties");
-		log.warn(strMessage);	
-	}	
+		log.warn(strMessage);
+	}
 	public static void logInfo(String strMessage) {
-		Logger log = null;		
+		Logger log = null;
 		log = Logger.getLogger("TeamQuery");
 		PropertyConfigurator.configure("log4j.properties");
-		log.info(strMessage);	
-	}	
-		
+		log.info(strMessage);
+	}
+
 	public static void main(String[] args) throws Exception, IOException {
 		// TODO Auto-generated method stub
 		if(init()) {
@@ -192,7 +197,7 @@ public class TeamQuery implements EventInterface {
 			dlg.setInterfaceEvent(new TeamQuery());
 		}
 
-	}	
-	
-	
+	}
+
+
 }
